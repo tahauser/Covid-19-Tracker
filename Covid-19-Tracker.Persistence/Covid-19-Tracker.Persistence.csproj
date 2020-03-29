@@ -16,6 +16,7 @@
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="Repositories\interfaces\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Covid-19-Tracker.Entites\Covid-19-Tracker.Entites.csproj" />
