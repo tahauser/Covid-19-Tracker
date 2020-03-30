@@ -28,11 +28,11 @@ namespace Covid_19_Tracker.Persistence.Data
 
             var admin = new IdentityUser
             {
-                UserName = Configuration.GetSection("AppSettings")["UserName"]
+                UserName = Configuration.GetSection("AdminCredentials")["UserName"]
             };
 
-            string userPassword = Configuration.GetSection("AppSettings")["UserPassword"];
-            var user = await UserManager.FindByNameAsync(Configuration.GetSection("AppSettings")["UserName"]);
+            string userPassword = Configuration.GetSection("AdminCredentials")["UserPassword"];
+            var user = await UserManager.FindByNameAsync(Configuration.GetSection("AdminCredentials")["UserName"]);
 
             if (user == null)
             {

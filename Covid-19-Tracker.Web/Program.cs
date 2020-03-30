@@ -15,7 +15,6 @@ namespace Covid_19_Tracker.Web
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
 
             var host = CreateHostBuilder(args).Build();
 

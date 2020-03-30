@@ -1,0 +1,55 @@
+﻿@model AdminViewModel
+@{
+	ViewData["Title"] = "Index";
+}
+
+
+<table class="table table-striped">
+	<tr>
+		<th>Id</th>
+		<th>Username</th>
+		<th>Password</th>
+		<th>Role</th>
+		<th>Actions</th>
+	</tr>
+	@foreach (var user in Model.Admins)
+	{
+		<tr>
+			<td>@user.Id</td>
+			<td>@user.UserName</td>
+			<td>@user.PasswordHash</td>
+			<td>Admin</td>
+			<td>
+			</td>
+		</tr>
+	}
+	@foreach (var user in Model.Managers)
+	{
+		<tr>
+			<td>@user.Id</td>
+			<td>@user.UserName</td>
+			<td>@user.PasswordHash</td>
+			<td>Manager</td>
+			<td>
+				<a asp-action="Delete" asp-route-id="@user.Id">Supprimer</a>
+			</td>
+		</tr>
+	}
+	@foreach (var user in Model.Users)
+	{
+
+		<tr>
+			<td>@user.Id</td>
+			<td>@user.UserName</td>
+			<td>@user.PasswordHash</td>
+			<td>Utilisateur</td>
+			<td>
+				<a asp-action="Delete" asp-route-id="@user.Id">Supprimer</a>
+			</td>
+		</tr>
+	}
+</table>
+
+<a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Ajouter un utilisateur</a>
+
+

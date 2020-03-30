@@ -35,7 +35,6 @@ namespace Covid_19_Tracker.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin,Manager,User")]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
@@ -43,12 +42,13 @@ namespace Covid_19_Tracker.Web.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             return View(loginViewModel);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         public IActionResult Register()
         {
@@ -71,10 +71,9 @@ namespace Covid_19_Tracker.Web.Controllers
                 var addRoleresult = await _userManager.AddToRoleAsync(user, registerViewModel.Role);
                 if (addRoleresult.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Home");
                 }  
             }
-
             return View(registerViewModel);
         }
 
@@ -82,7 +81,7 @@ namespace Covid_19_Tracker.Web.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

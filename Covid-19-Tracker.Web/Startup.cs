@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Covid_19_Tracker.Persistence;
 using Covid_19_Tracker.Persistence.Repositories;
 using Covid_19_Tracker.Persistence.Repositories.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,8 +32,21 @@ namespace Covid_19_Tracker.Web
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Covid19TrackerDatabase")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(
+                config => {
+                    config.Password.RequiredLength = 6;
+                    config.Password.RequireDigit = true;
+                    config.Password.RequireLowercase = true;
+                    config.Password.RequireUppercase = true;
+                    config.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<AppDbContext>();
+            services.AddAuthorization(config => {
+                var policy = new AuthorizationPolicyBuilder()
+                     .RequireAuthenticatedUser()
+                     .Build();
+                config.DefaultPolicy = policy;
+            });
             services.AddScoped<IEntityRepository, EntityRepository>();
             services.AddControllersWithViews();
         }
