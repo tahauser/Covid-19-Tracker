@@ -41,11 +41,5 @@ namespace Covid_19_Tracker.Web.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(string errorMessage = null)
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ErrorMessage = errorMessage });
-        }
     }
 }

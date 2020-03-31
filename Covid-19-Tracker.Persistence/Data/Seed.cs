@@ -16,23 +16,24 @@ namespace Covid_19_Tracker.Persistence.Data
             var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
             string[] roles = { "Admin", "Manager", "User" };
-            IdentityResult roleResult;
+            IdentityResult _;
             foreach (var role in roles)
             {
                 var roleExist = await RoleManager.RoleExistsAsync(role);
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole(role));
+                    _ = await RoleManager.CreateAsync(new IdentityRole(role));
                 }
             }
 
+            string userName = Configuration.GetSection("AdminCredentials")["UserName"];
             var admin = new IdentityUser
             {
-                UserName = Configuration.GetSection("AdminCredentials")["UserName"]
+                UserName = userName
             };
 
             string userPassword = Configuration.GetSection("AdminCredentials")["UserPassword"];
-            var user = await UserManager.FindByNameAsync(Configuration.GetSection("AdminCredentials")["UserName"]);
+            var user = await UserManager.FindByNameAsync(userName);
 
             if (user == null)
             {

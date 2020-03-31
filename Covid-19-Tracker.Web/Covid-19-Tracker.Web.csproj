@@ -5,6 +5,13 @@
     <RootNamespace>Covid_19_Tracker.Web</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\Error\**" />
+    <Content Remove="Views\Error\**" />
+    <EmbeddedResource Remove="Views\Error\**" />
+    <None Remove="Views\Error\**" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
@@ -26,6 +33,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
 </Project>
