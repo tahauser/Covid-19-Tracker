@@ -1,8 +1,8 @@
-﻿using System;
-namespace Covid_19_Tracker.Entites
+﻿namespace Covid_19_Tracker.Entites
 {
-    public class Address
+    public class Addresse
     {
+        public string Id { get; set; }
         public string Ville { get; set; }
         public string Region { get; set; }
         public int Codepostal { get; set; }
