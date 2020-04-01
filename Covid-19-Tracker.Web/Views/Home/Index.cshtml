@@ -1,7 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
-<div class="text-center">
-    <h1 class="display-4">Bonjour !</h1>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Bonjour !</h1>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="container">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="CasPositifs" asp-action="Index">Espace cas positifs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  asp-controller="CasSuivis" asp-action="Index">Espace cas suivis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="FichesSuivi" asp-action="Index">Fiches de suivi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="" asp-route-id="">Parametrage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="" asp-route-id="">Statistique</a>
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>
